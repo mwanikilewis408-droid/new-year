@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lets Welcome 2026 🎆</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle, #000428, #004e92);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .card {
+        background: rgba(0,0,0,0.6);
+        padding: 30px;
+        border-radius: 20px;
+        z-index: 2;
+        animation: fadeIn 1.5s ease;
+    }
+
+    input {
+        padding: 12px;
+        width: 80%;
+        border-radius: 20px;
+        border: none;
+        margin-bottom: 15px;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 12px 30px;
+        border-radius: 25px;
+        border: none;
+        background: gold;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: red;
+        animation: fall linear forwards;
+    }
+
+    .firework {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: white;
+        animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes fall {
+        from {
+            transform: translateY(-50px);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+
+    @keyframes explode {
+        from {
+            transform: scale(0.2);
+            opacity: 1;
+        }
+        to {
+            transform: scale(8);
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h1>🎉 Happy New Year 🎉</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <br>
+    <button onclick="startCelebration()">Celebrate 🎆</button>
+</div>
+
+<script>
+function startCelebration() {
+    const name = document.getElementById("nameInput").value.trim();
+
+    if (name === "") {
+        alert("Please enter your name 😊");
+        return;
+    }
+
+    document.getElementById("card").innerHTML =
+        `<h1>Happy New Year 2026, ${name}! 🎊</h1>
+         <p>Wishing you success and happiness in this promising year ✨</p>`;
+
+    launchConfetti();
+
+    // Fireworks start after confetti
+    setTimeout(() => {
+        launchFireworks();
+    }, 3000);
+}
+
+// CONFETTI FUNCTION
+function launchConfetti() {
+    for (let i = 0; i < 80; i++) {
+        let confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor =
+            `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration =
+            (Math.random() * 3 + 2) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 5000);
+    }
+}
+
+// FIREWORKS FUNCTION
+function launchFireworks() {
+    setInterval(() => {
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight / 2;
+
+        for (let i = 0; i < 25; i++) {
+            let firework = document.createElement("div");
+            firework.className = "firework";
+            firework.style.left = x + "px";
+            firework.style.top = y + "px";
+            firework.style.backgroundColor =
+                `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+            document.body.appendChild(firework);
+
+            setTimeout(() => firework.remove(), 1000);
+        }
+    }, 800);
+}
+</script>
+
+</body>
+</html>
